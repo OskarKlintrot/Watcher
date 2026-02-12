@@ -1,7 +1,24 @@
+#:property Authors=Oskar Klintrot
+#:property Copyright=Copyright (c) Oskar Klintrot 2026
+#:property PackageIcon=icon.png
+#:property PackageReadmeFile=README.md
+#:property PackageLicenseExpression=MIT
+#:property RepositoryUrl=https://github.com/OskarKlintrot/Watcher
+#:property OutputType=Exe
+#:property PackageId=dotnet-watcher
+#:property PackAsTool=true
+#:property ToolCommandName=watch
+#:property Description=dotnet watch, but for file-based apps
+#:property PackageTags=Watch,Watcher
+#:property PublishTrimmed=true
+#:property PublishSelfContained=true
+#:property PublishAot=true
+#:property StripSymbols=true
+#:property RuntimeIdentifiers=linux-x64;linux-arm64;win-x64;win-arm64;
+
 #:property TreatWarningsAsErrors=true
 #:property AnalysisLevel=latest-Recommended
 #:property WarningsAsErrors=true
-#:property PublishAot=true
 
 #:package Microsoft.Extensions.Hosting@10.0.2
 
