@@ -5,9 +5,9 @@
 #:property PackageLicenseExpression=MIT
 #:property RepositoryUrl=https://github.com/OskarKlintrot/Watcher
 #:property OutputType=Exe
-#:property PackageId=dotnet-watcher
+#:property PackageId=dotnet-fba-watcher
 #:property PackAsTool=true
-#:property ToolCommandName=watch
+#:property ToolCommandName=watch-fba
 #:property Description=dotnet watch, but for file-based apps
 #:property PackageTags=Watch,Watcher
 #:property PublishTrimmed=true
