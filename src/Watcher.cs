@@ -20,7 +20,7 @@
 #:property AnalysisLevel=latest-Recommended
 #:property WarningsAsErrors=true
 
-#:package Microsoft.Extensions.Hosting@10.0.2
+#:package Microsoft.Extensions.Hosting@10.0.3
 
 using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
