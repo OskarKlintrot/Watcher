@@ -1,3 +1,5 @@
+# Based on https://github.com/baronfel/multi-rid-tool/blob/main/.github/workflows/build-aot-packages.yml
+
 name: Build AOT Tool Packages
 
 on:

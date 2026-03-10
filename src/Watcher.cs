@@ -14,6 +14,7 @@
 #:property PublishSelfContained=true
 #:property PublishAot=true
 #:property StripSymbols=true
+#:property CopyOutputSymbolsToPublishDirectory=false
 #:property RuntimeIdentifiers=linux-x64;linux-arm64;win-x64;win-arm64;
 
 #:property TreatWarningsAsErrors=true
