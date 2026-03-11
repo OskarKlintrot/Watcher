@@ -81,9 +81,6 @@ jobs:
       run: |
         mkdir -p merged-packages extracted-artifacts
 
-        # Collect nupkg files that are already extracted.
-        find collected-packages -type f -name "*.nupkg" -exec cp -f {} merged-packages/ \;
-
         # Extract any downloaded zip artifacts and collect nupkg files from them.
         i=0
         while IFS= read -r zip_file; do
