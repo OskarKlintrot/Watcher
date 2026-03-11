@@ -4,4 +4,4 @@
 
 ## Icon
 
-Binoculars by Luis Prado from <a href="https://thenounproject.com/browse/icons/term/binoculars/" target="_blank" title="Binoculars Icons">Noun Project</a> (CC BY 3.0)
+Binoculars by Luis Prado from [Noun Project](https://thenounproject.com/browse/icons/term/binoculars/) (CC BY 3.0)
