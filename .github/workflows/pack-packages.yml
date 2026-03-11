@@ -77,20 +77,10 @@ jobs:
       with:
         path: collected-packages
 
-    - name: Extract and merge nupkg files
+    - name: Merge nupkg files
       run: |
-        mkdir -p merged-packages extracted-artifacts
-
-        # Extract any downloaded zip artifacts and collect nupkg files from them.
-        i=0
-        while IFS= read -r zip_file; do
-          i=$((i + 1))
-          target_dir="extracted-artifacts/$i"
-          mkdir -p "$target_dir"
-          unzip -q "$zip_file" -d "$target_dir"
-        done < <(find collected-packages -type f -name "*.zip")
-
-        find extracted-artifacts -type f -name "*.nupkg" -exec cp -f {} merged-packages/ \;
+        mkdir -p merged-packages
+        find collected-packages -type f -name "*.nupkg" -exec cp -f {} merged-packages/ \;
 
     - name: List all merged packages
       run: |
