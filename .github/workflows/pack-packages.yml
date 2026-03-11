@@ -4,8 +4,9 @@ name: Build AOT Tool Packages
 
 on:
   push:
+    branches: [main]
+    tags: ['**']
   pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -76,17 +77,22 @@ jobs:
       with:
         path: collected-packages
 
-    - name: List all collected packages
+    - name: Merge nupkg files
       run: |
-        echo "All collected AOT packages:"
-        find collected-packages -name "*.nupkg" -type f | sort
+        mkdir -p merged-packages
+        find collected-packages -type f -name "*.nupkg" -exec cp -f {} merged-packages/ \;
+
+    - name: List all merged packages
+      run: |
+        echo "All merged AOT packages:"
+        find merged-packages -name "*.nupkg" -type f | sort
         echo ""
-        echo "Package count: $(find collected-packages -name "*.nupkg" -type f | wc -l)"
+        echo "Package count: $(find merged-packages -name "*.nupkg" -type f | wc -l)"
 
     - name: Upload all packages as single artifact
       uses: actions/upload-artifact@v4
       with:
         name: all-aot-packages
-        path: collected-packages/**/*.nupkg
+        path: merged-packages/*.nupkg
         retention-days: 90
         if-no-files-found: error
