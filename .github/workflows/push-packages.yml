@@ -10,7 +10,31 @@ on:
   workflow_dispatch:
 
 jobs:
+  resolve-package-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.package_version.outputs.version }}
+
+    steps:
+    - name: Determine package version
+      id: package_version
+      shell: pwsh
+      run: |
+        if ("${{ github.ref }}".StartsWith("refs/tags/")) {
+          $version = "${{ github.ref_name }}"
+          if ($version.StartsWith("v")) {
+            $version = $version.Substring(1)
+          }
+        } else {
+          $version = "0.0.0-ci.${{ github.run_number }}"
+        }
+        if ([string]::IsNullOrWhiteSpace($version)) {
+          throw "Could not determine package version from git ref name."
+        }
+        "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
   build-platform-specific:
+    needs: resolve-package-version
     strategy:
       fail-fast: false
       matrix:
@@ -37,7 +61,7 @@ jobs:
       uses: actions/setup-dotnet@v4
 
     - name: Build AOT package for ${{ matrix.rid }}
-      run: dotnet pack src/Watcher.cs --use-current-runtime
+      run: dotnet pack src/Watcher.cs --use-current-runtime -p:Version=${{ needs.resolve-package-version.outputs.version }}
 
     - name: Upload platform-specific package
       uses: actions/upload-artifact@v4
@@ -48,6 +72,7 @@ jobs:
         if-no-files-found: error
 
   build-agnostic:
+    needs: resolve-package-version
     runs-on: ubuntu-latest
 
     steps:
@@ -57,7 +82,7 @@ jobs:
       uses: actions/setup-dotnet@v4
 
     - name: Build agnostic AOT package
-      run: dotnet pack src/Watcher.cs
+      run: dotnet pack src/Watcher.cs -p:Version=${{ needs.resolve-package-version.outputs.version }}
 
     - name: Upload agnostic package
       uses: actions/upload-artifact@v4
