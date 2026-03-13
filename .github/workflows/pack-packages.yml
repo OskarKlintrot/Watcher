@@ -96,3 +96,29 @@ jobs:
         path: merged-packages/*.nupkg
         retention-days: 90
         if-no-files-found: error
+
+  publish-to-nuget:
+    needs: collect-all-packages
+    # if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # enable GitHub OIDC token issuance for this job
+
+    steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+
+    - name: Download all-aot-packages artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: all-aot-packages
+        path: downloaded-packages
+
+    - name: List downloaded packages
+      run: find downloaded-packages -type f -name "*.nupkg" | sort
+
+    # - name: Publish packages to NuGet
+    #   env:
+    #     NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    #   run: dotnet nuget push "downloaded-packages/*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key "$NUGET_API_KEY" --skip-duplicate
