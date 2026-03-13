@@ -25,7 +25,6 @@
 #:property StripSymbols=true
 #:property InvariantGlobalization=true
 #:property IlcDisableReflection=true
-#:property IlcTrimMetadata=true
 #:property IlcOptimizationPreference=Size
 
 #:property TreatWarningsAsErrors=true
