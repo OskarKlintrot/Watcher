@@ -9,13 +9,24 @@
 #:property PackAsTool=true
 #:property ToolCommandName=watch-fba
 #:property Description=dotnet watch, but for file-based apps
+#:property RuntimeIdentifiers=linux-x64;linux-arm64;win-x64;win-arm64;
 #:property PackageTags=Watch,Watcher
 #:property PublishTrimmed=true
 #:property PublishSelfContained=true
-#:property PublishAot=true
-#:property StripSymbols=true
 #:property CopyOutputSymbolsToPublishDirectory=false
-#:property RuntimeIdentifiers=linux-x64;linux-arm64;win-x64;win-arm64;
+#:property PublishAot=true
+
+// Size optimisation bits for Native AOT
+#:property DebuggerSupport=false
+#:property EventSourceSupport=false
+#:property HttpActivityPropagationSupport=false
+#:property MetricsSupport=false
+#:property TrimmerRemoveSymbols=true
+#:property StripSymbols=true
+#:property InvariantGlobalization=true
+#:property IlcDisableReflection=true
+#:property IlcTrimMetadata=true
+#:property IlcOptimizationPreference=Size
 
 #:property TreatWarningsAsErrors=true
 #:property AnalysisLevel=latest-Recommended
